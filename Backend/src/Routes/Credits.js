@@ -6,7 +6,8 @@ const {
   getCredit,
   updateCredit,
   deleteCredit,
-  updateValue
+  updateValue,
+  getCreditByCC
 } = require("../controllers/Credit.controller");
 
 router.route("/")
@@ -14,7 +15,7 @@ router.route("/")
     .post(createCredit);
 
 router.route("/:id")
-    .get(getCredit)
+    .get(getCreditByCC)
     .put(updateCredit)
     .delete(deleteCredit)
     .patch(updateValue)
