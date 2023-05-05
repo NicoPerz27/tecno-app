@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
 const cookies = new Cookies();
-
+const URLCredits = "http://localhost:4000/credits";
 export default class Client extends Component {
   LogOut = () => {
     cookies.remove("CC", { path: "/" });
@@ -13,10 +14,16 @@ export default class Client extends Component {
     cookies.remove("username", { path: "/" });
     window.location.href = "./LogIn";
   };
+  getCredit = async (creditId) => {
+    const res = await axios.get(URLCredits + "/" + creditId);
+    console.log(res);
+  };
   componentDidMount() {
     if (cookies.get("rol") != "Client") {
       window.location.href = "./LogIn";
     }
+    console.log(cookies.get('CC'))
+    this.getCredit(cookies.get('CC'))
   }
   render() {
     return (

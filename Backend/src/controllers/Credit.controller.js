@@ -42,6 +42,10 @@ creditCtrl.getCredit = async (req, res) => {
   const credit = await creditModel.findById(req.params.id);
   res.json(credit);
 };
+creditCtrl.getCreditByCC = async (req, res) => {
+  const credit = await creditModel.findOne({CC:req.params.CC});
+  res.json(credit);
+};
 creditCtrl.updateCredit = async (req, res) => {
   const {
     CC,
