@@ -5,6 +5,20 @@ import axios from "axios";
 const cookies = new Cookies();
 const URLCredits = "http://localhost:4000/credits";
 export default class Client extends Component {
+  state = {
+    credit: {
+      CC: "",
+      name: "",
+      lastname: "",
+      letterurl: "",
+      permissurl: "",
+      total: 0,
+      valueCuote: 0,
+      cuotes: 0,
+      sellername: "",
+      contactsell: "",
+    },
+  };
   LogOut = () => {
     cookies.remove("CC", { path: "/" });
     cookies.remove("name", { path: "/" });
@@ -16,21 +30,28 @@ export default class Client extends Component {
   };
   getCredit = async (creditId) => {
     const res = await axios.get(URLCredits + "/" + creditId);
+    this.setState({ credit: res.data });
     console.log(res);
+    //console.log(this.state.credit);
   };
   componentDidMount() {
     if (cookies.get("rol") != "Client") {
       window.location.href = "./LogIn";
     }
-    console.log(cookies.get('CC'))
-    this.getCredit(cookies.get('CC'))
+    console.log(cookies.get("CC"));
+    this.getCredit(cookies.get("CC"));
   }
+  //<h1>{this.state.credit.CC}</h1>
+  //<img src={this.state.credit.letterurl}></img>
   render() {
     return (
       <div>
-        <button className="btn btn-danger" onClick={() => this.LogOut()}>
-          Cerrar Sesión
-        </button>
+        <div className="title-client"></div>
+        <div>
+          <button className="btn btn-danger" onClick={() => this.LogOut()}>
+            Cerrar Sesión
+          </button>
+        </div>
       </div>
     );
   }
