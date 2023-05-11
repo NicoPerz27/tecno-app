@@ -29,6 +29,7 @@ export default class Client extends Component {
     window.location.href = "./LogIn";
   };
   getCredit = async (creditId) => {
+    console.log(creditId)
     const res = await axios.get(URLCredits + "/" + creditId);
     this.setState({ credit: res.data });
     console.log(res);
@@ -38,8 +39,12 @@ export default class Client extends Component {
     if (cookies.get("rol") != "Client") {
       window.location.href = "./LogIn";
     }
+<<<<<<< HEAD
     console.log(cookies.get("CC"));
     this.getCredit(cookies.get("CC"));
+=======
+    this.getCredit(cookies.get('CC'))
+>>>>>>> 5b573b105979e632718a28398529bd38436aa035
   }
   //<h1>{this.state.credit.CC}</h1>
   //<img src={this.state.credit.letterurl}></img>
